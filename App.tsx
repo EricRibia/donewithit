@@ -7,6 +7,7 @@ import {
   Platform,
   TouchableNativeFeedback,
   Text,
+  Alert,
 } from "react-native";
 import { useState } from "react";
 
@@ -63,6 +64,18 @@ export default function App() {
             <Text style={styles.textStyles}>Native Feedback</Text>
           </View>
         </TouchableNativeFeedback>
+        <View style={styles.btnsContainer}>
+          <Button
+            title="Show Alert"
+            onPress={() => Alert.alert("Success", "This was done successfully")}
+          />
+          <Button
+            title="Show Prompt"
+            onPress={() =>
+              Alert.prompt("Success", "This was done successfully")
+            }
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -73,6 +86,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
+  btnsContainer: {
+    marginVertical: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   sourImageStyles: {
     marginVertical: 8,
     width: "100%",
@@ -81,8 +99,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   contentContainer: {
-    flex: 1,
     padding: 10,
+    flex: 1,
   },
   nativeFeedbackView: {
     width: "100%",
