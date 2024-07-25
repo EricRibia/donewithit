@@ -5,6 +5,8 @@ import {
   Image,
   Button,
   Platform,
+  TouchableNativeFeedback,
+  Text,
 } from "react-native";
 import { useState } from "react";
 
@@ -56,6 +58,11 @@ export default function App() {
             uri: "https://picsum.photos/500/500",
           }}
         />
+        <TouchableNativeFeedback>
+          <View style={styles.nativeFeedbackView}>
+            <Text style={styles.textStyles}>Native Feedback</Text>
+          </View>
+        </TouchableNativeFeedback>
       </View>
     </SafeAreaView>
   );
@@ -77,10 +84,21 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
   },
+  nativeFeedbackView: {
+    width: "100%",
+    height: 100,
+    backgroundColor: "rgba(75,182,144,0.67)",
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   networkImageStyles: {
     marginVertical: 8,
     resizeMode: "cover",
     width: "100%",
     borderRadius: 20,
+  },
+  textStyles: {
+    fontWeight: "300",
   },
 });
