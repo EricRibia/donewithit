@@ -8,10 +8,122 @@ import {
   TouchableNativeFeedback,
   Text,
   Alert,
+  StatusBar,
+  ImageBackground,
+  TouchableOpacity,
+  Dimensions,
+  useWindowDimensions,
 } from "react-native";
 import { useState } from "react";
+import { useDeviceOrientation } from "@react-native-community/hooks";
 
 export default function App() {
+  console.log(useDeviceOrientation());
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View
+        style={[
+          ImageViewScreenStyles.bg,
+          {
+            paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+          },
+        ]}
+      >
+        <View style={ImageViewScreenStyles.btnContainer}>
+          <TouchableOpacity>
+            <View style={ImageViewScreenStyles.btnOne}></View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View style={ImageViewScreenStyles.btnTwo}></View>
+          </TouchableOpacity>
+        </View>
+        <Image
+          style={ImageViewScreenStyles.img}
+          source={require("./assets/car1.jpg")}
+        />
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const ImageViewScreenStyles = StyleSheet.create({
+  bg: {
+    backgroundColor: "#000",
+    flex: 1,
+  },
+  btnContainer: {
+    justifyContent: "space-between",
+    paddingLeft: 10,
+    paddingRight: 10,
+    flexDirection: "row",
+  },
+  btnOne: {
+    backgroundColor: "#4ecdc4",
+    width: 50,
+    height: 50,
+  },
+  btnTwo: {
+    backgroundColor: "#fc5c65",
+    width: 50,
+    height: 50,
+  },
+  img: {
+    flex: 1,
+    resizeMode: "contain",
+    width: "100%",
+    height: "100%",
+  },
+});
+const landingScreenStyles = StyleSheet.create({
+  bg: {
+    width: "100%",
+    resizeMode: "cover",
+    alignItems: "center",
+    flex: 1,
+  },
+  registerBtn: {
+    width: "100%",
+    height: 40,
+    backgroundColor: "#fc5c65",
+  },
+  loginBtn: {
+    width: "100%",
+    height: 40,
+    backgroundColor: "#4ecdc4",
+  },
+  logo: {
+    fontWeight: "bold",
+    color: "#fc5c65",
+    fontSize: 30,
+    paddingTop: 100,
+  },
+  subText: {
+    color: "#fff",
+    fontWeight: "500",
+  },
+});
+
+export function LandingScreen() {
+  return (
+    <View style={{ flex: 1 }}>
+      <ImageBackground
+        style={landingScreenStyles.bg}
+        source={require("./assets/bg.jpg")}
+      >
+        <Text style={landingScreenStyles.logo}>Cars. App</Text>
+        <Text style={landingScreenStyles.subText}>Know your cars</Text>
+      </ImageBackground>
+      <TouchableOpacity>
+        <View style={landingScreenStyles.registerBtn}></View>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <View style={landingScreenStyles.loginBtn}></View>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+export function Current() {
   const [numberOfLines, setNumberOfLines] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -42,7 +154,9 @@ export default function App() {
       <View
         style={[
           styles.contentContainer,
-          { paddingTop: Platform.OS === "android" ? 40 : 0 },
+          {
+            paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+          },
         ]}
       >
         <Image
