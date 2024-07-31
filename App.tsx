@@ -16,33 +16,44 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useDeviceOrientation } from "@react-native-community/hooks";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import WelcomeScreen from "./Screens/WelcomeScreen";
+import ListingsScreen from "./Screens/ListingsScreen";
+import ListingDetailsScreen from "./Screens/ListingDetailsScreen";
+import ViewImageScreen from "./Screens/ViewImageScreen";
 export default function App() {
   console.log(useDeviceOrientation());
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View
-        style={[
-          ImageViewScreenStyles.bg,
-          {
-            paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-          },
-        ]}
-      >
-        <View style={ImageViewScreenStyles.btnContainer}>
-          <TouchableOpacity>
-            <View style={ImageViewScreenStyles.btnOne}></View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View style={ImageViewScreenStyles.btnTwo}></View>
-          </TouchableOpacity>
-        </View>
-        <Image
-          style={ImageViewScreenStyles.img}
-          source={require("./assets/car1.jpg")}
-        />
-      </View>
-    </SafeAreaView>
+    // <SafeAreaView style={{ flex: 1 }}>
+    //   <View
+    //     style={[
+    //       ImageViewScreenStyles.bg,
+    //
+    //       {
+    //         backgroundColor: "#fff",
+    //         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    //       },
+    //     ]}
+    //   >
+    //     <ListingsScreen />
+    //     {/*<WelcomeScreen />*/}
+    //     {/*<View style={ImageViewScreenStyles.btnContainer}>*/}
+    //     {/*  <TouchableOpacity>*/}
+    //     {/*    <View style={ImageViewScreenStyles.btnOne}></View>*/}
+    //     {/*  </TouchableOpacity>*/}
+    //     {/*  <TouchableOpacity>*/}
+    //     {/*    <View style={ImageViewScreenStyles.btnTwo}></View>*/}
+    //     {/*  </TouchableOpacity>*/}
+    //     {/*</View>*/}
+    //     {/*<Image*/}
+    //     {/*  style={ImageViewScreenStyles.img}*/}
+    //     {/*  source={require("./assets/car1.jpg")}*/}
+    //     {/*/>*/}
+    //   </View>
+    // </SafeAreaView>
+    // <ListingsScreen />
+    // <ListingDetailsScreen />
+    <ViewImageScreen />
   );
 }
 
@@ -100,6 +111,30 @@ const landingScreenStyles = StyleSheet.create({
   subText: {
     color: "#fff",
     fontWeight: "500",
+  },
+  borderStyles: {
+    backgroundColor: "dodgerblue",
+    width: 100,
+    height: 100,
+    borderWidth: 10,
+    borderColor: "royalblue",
+    borderRadius: 10,
+  },
+  shadowIOSStyles: {
+    shadowColor: "grey",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+  },
+  textStyles: {
+    fontSize: 30,
+    fontFamily: "Roboto", //android
+    fontWeight: "600",
+    fontStyle: "italic",
+    textTransform: "capitalize",
+    textDecorationLine: "line-through",
+    textAlign: "center",
+    lineHeight: 30,
   },
 });
 
@@ -232,5 +267,40 @@ const styles = StyleSheet.create({
   },
   textStyles: {
     fontWeight: "300",
+  },
+});
+
+export function Apptext({ children }) {
+  return (
+    <View>
+      <MaterialCommunityIcons name="email" size={100} color="dodgerblue" />
+      <Text style={textStyles.text}>{children}</Text>
+    </View>
+  );
+}
+
+Platform.select({
+  ios: {
+    fontSize: 20,
+    fontFamily: "Avenir",
+  },
+  android: {
+    fontSize: 18,
+    fontFamily: "Roboto",
+  },
+});
+const textStyles = StyleSheet.create({
+  text: {
+    color: "tomato",
+    ...Platform.select({
+      ios: {
+        fontSize: 20,
+        fontFamily: "Avenir",
+      },
+      android: {
+        fontSize: 18,
+        fontFamily: "Roboto",
+      },
+    }),
   },
 });
