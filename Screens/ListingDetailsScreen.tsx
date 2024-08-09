@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Colors } from "../utils/colors";
+import ListItemComponent from "../components/ListItemComponent";
 
 export default function () {
   return (
@@ -25,25 +26,12 @@ export default function () {
           KES 100
         </Text>
       </View>
-      <View style={styles.userInfoContainer}>
-        <Image
-          style={styles.userImg}
-          source={require("./../assets/selfie.jpg")}
-        />
-        <View>
-          <Text style={[styles.text, { marginBottom: 0 }]}>Eric N. Ribia</Text>
-          <Text
-            style={[
-              styles.text,
-              {
-                color: "rgba(157,157,157,0.86)",
-              },
-            ]}
-          >
-            5 Listings
-          </Text>
-        </View>
-      </View>
+
+      <ListItemComponent
+        title="Eric N. Ribia"
+        description=" 5 Listings"
+        image={require("./../assets/selfie.jpg")}
+      />
     </View>
   );
 }

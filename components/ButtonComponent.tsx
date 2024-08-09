@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   btnStyles: {
     width: "100%",
     borderRadius: 100,
-    height: 50,
+    padding: 15,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     textTransform: "uppercase",
     fontWeight: "500",
-    fontSize: 20,
+    fontSize: 18,
   },
 });
 
