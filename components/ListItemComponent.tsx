@@ -10,42 +10,82 @@ import React from "react";
 import { ImageSourcePropType } from "react-native/Libraries/Image/Image";
 import { Colors } from "../utils/colors";
 import { Swipeable } from "react-native-gesture-handler";
+import IconComponent from "./IconComponent";
 
 interface ListItemProps {
   title: string;
-  description: string;
-  image: ImageSourcePropType;
+  description?: string;
+  isSwipeable: boolean;
+  image?: ImageSourcePropType;
+  icon?: string;
+  iconBackground?: string;
   onPress: () => void;
-  renderRightActions: any;
+  renderRightActions?: any;
 }
 const ListItemComponent: React.FC<ListItemProps> = ({
   title,
   description,
   image,
   onPress,
+  icon,
+  iconBackground,
   renderRightActions,
+  isSwipeable,
 }) => {
   return (
-    <Swipeable renderRightActions={renderRightActions}>
-      <TouchableHighlight onPress={onPress} underlayColor={Colors.light}>
-        <View style={styles.userInfoContainer}>
-          <Image style={styles.userImg} source={image} />
-          <View>
-            <Text style={[styles.text, { marginBottom: 0 }]}>{title}</Text>
-            <Text
-              style={[
-                styles.text,
-                {
-                  color: "rgba(157,157,157,0.86)",
-                },
-              ]}
-            >
-              {description}
-            </Text>
+    <View>
+      {isSwipeable ? (
+        <Swipeable renderRightActions={renderRightActions}>
+          <TouchableHighlight onPress={onPress} underlayColor={Colors.light}>
+            <View style={styles.userInfoContainer}>
+              {image && <Image style={styles.userImg} source={image} />}
+              {icon && (
+                <IconComponent name={icon} backgroundColor={iconBackground} />
+              )}
+              <View>
+                <Text style={[styles.text, { marginBottom: 0 }]}>{title}</Text>
+                {icon && (
+                  <Text
+                    style={[
+                      styles.text,
+                      {
+                        color: "rgba(157,157,157,0.86)",
+                      },
+                    ]}
+                  >
+                    {icon}
+                  </Text>
+                )}
+              </View>
+            </View>
+          </TouchableHighlight>
+        </Swipeable>
+      ) : (
+        <TouchableHighlight onPress={onPress} underlayColor={Colors.light}>
+          <View style={styles.userInfoContainer}>
+            {image && <Image style={styles.userImg} source={image} />}
+            {icon && (
+              <IconComponent name={icon} backgroundColor={iconBackground} />
+            )}
+            <View style={{ marginLeft: 10 }}>
+              <Text style={[styles.text, { marginBottom: 0 }]}>{title}</Text>
+              {description && (
+                <Text
+                  style={[
+                    styles.text,
+                    {
+                      color: "rgba(157,157,157,0.86)",
+                    },
+                  ]}
+                >
+                  {description}
+                </Text>
+              )}
+            </View>
           </View>
-        </View>
-      </TouchableHighlight>
-    </Swipeable>
+        </TouchableHighlight>
+      )}
+    </View>
   );
 };
 
@@ -59,8 +99,10 @@ const styles = StyleSheet.create({
   },
   userInfoContainer: {
     flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 15,
+    backgroundColor: "#fff",
   },
   userImg: {
     width: 50,

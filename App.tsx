@@ -6,6 +6,7 @@ import ListItemSeperator from "./components/ListItemSeperator";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ListItemDeleteAction from "./components/ListItemDeleteAction";
 import { useState } from "react";
+import AccountScreen from "./Screens/AccountScreen";
 
 export interface MessagesType {
   id: number;
@@ -41,6 +42,7 @@ export default function App() {
     },
   ];
   const [messages, setMessages] = useState<MessagesType[]>(data);
+  const [refreshing, setRefreshing] = useState(false);
 
   const handleDelete = (message: {
     id: number;
@@ -50,26 +52,35 @@ export default function App() {
   }) => {
     setMessages(messages.filter((m) => m.id !== message.id));
   };
-  return (
-    <Screen>
-      <FlatList
-        data={messages}
-        renderItem={({ item }) => (
-          <GestureHandlerRootView>
-            <ListItemComponent
-              title={item.title}
-              description={item.description}
-              image={item.image}
-              onPress={() => console.log("clicked")}
-              renderRightActions={() => (
-                <ListItemDeleteAction onPress={() => handleDelete(item)} />
-              )}
-            />
-          </GestureHandlerRootView>
-        )}
-        keyExtractor={(message) => message.id.toString()}
-        ItemSeparatorComponent={ListItemSeperator}
-      />
-    </Screen>
-  );
+  return <AccountScreen />;
 }
+//
+// <FlatList
+//     data={messages}
+//     renderItem={({ item }) => (
+//         <GestureHandlerRootView>
+//           <ListItemComponent
+//               title={item.title}
+//               description={item.description}
+//               image={item.image}
+//               onPress={() => console.log("clicked")}
+//               renderRightActions={() => (
+//                   <ListItemDeleteAction onPress={() => handleDelete(item)} />
+//               )}
+//           />
+//         </GestureHandlerRootView>
+//     )}
+//     keyExtractor={(message) => message.id.toString()}
+//     ItemSeparatorComponent={ListItemSeperator}
+//     refreshing={refreshing}
+//     onRefresh={() =>
+//         setMessages([
+//           {
+//             id: 2,
+//             title: "T2",
+//             description: "D2",
+//             image: require("./assets/selfie.jpg"),
+//           },
+//         ])
+//     }
+// />
