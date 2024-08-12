@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import React from "react";
 import { ImageSourcePropType } from "react-native/Libraries/Image/Image";
-import { Colors } from "../utils/colors";
 import { Swipeable } from "react-native-gesture-handler";
 import IconComponent from "./IconComponent";
+import defaultStyles from "../default-styles";
 
 interface ListItemProps {
   title: string;
@@ -36,7 +36,10 @@ const ListItemComponent: React.FC<ListItemProps> = ({
     <View>
       {isSwipeable ? (
         <Swipeable renderRightActions={renderRightActions}>
-          <TouchableHighlight onPress={onPress} underlayColor={Colors.light}>
+          <TouchableHighlight
+            onPress={onPress}
+            underlayColor={defaultStyles.colors.light}
+          >
             <View style={styles.userInfoContainer}>
               {image && <Image style={styles.userImg} source={image} />}
               {icon && (
@@ -61,7 +64,10 @@ const ListItemComponent: React.FC<ListItemProps> = ({
           </TouchableHighlight>
         </Swipeable>
       ) : (
-        <TouchableHighlight onPress={onPress} underlayColor={Colors.light}>
+        <TouchableHighlight
+          onPress={onPress}
+          underlayColor={defaultStyles.colors.light}
+        >
           <View style={styles.userInfoContainer}>
             {image && <Image style={styles.userImg} source={image} />}
             {icon && (

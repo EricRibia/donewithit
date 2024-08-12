@@ -16,7 +16,6 @@ interface CustomButtonProps {
 }
 
 const IconComponent: React.FC<CustomButtonProps> = (props) => {
-  console.log("po");
   return (
     <View
       style={[

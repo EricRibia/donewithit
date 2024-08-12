@@ -13,7 +13,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ListItemComponent from "../components/ListItemComponent";
 import ListItemDeleteAction from "../components/ListItemDeleteAction";
 import ListItemSeperator from "../components/ListItemSeperator";
-import { Colors } from "../utils/colors";
+import defaultStyles from "../default-styles";
 export default function () {
   const accountOptions: {
     id: number;
@@ -25,13 +25,13 @@ export default function () {
       id: 1,
       title: "My Listings",
       icon: "format-list-bulleted",
-      iconBackground: Colors.secondary,
+      iconBackground: defaultStyles.colors.secondary,
     },
     {
       id: 2,
       title: "My Messages",
       icon: "email",
-      iconBackground: Colors.primary,
+      iconBackground: defaultStyles.colors.primary,
     },
   ];
   return (

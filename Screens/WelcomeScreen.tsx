@@ -1,6 +1,6 @@
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import ButtonComponent from "../components/ButtonComponent";
-import { Colors } from "../utils/colors";
+import defaultStyles from "../default-styles";
 
 export default function () {
   return (
@@ -15,11 +15,14 @@ export default function () {
         <View style={styles.btnsContainer}>
           <ButtonComponent
             label="register"
-            styles={{ backgroundColor: Colors.secondary, marginBottom: 15 }}
+            styles={{
+              backgroundColor: defaultStyles.colors.secondary,
+              marginBottom: 15,
+            }}
           />
           <ButtonComponent
             label="login"
-            styles={{ backgroundColor: Colors.primary }}
+            styles={{ backgroundColor: defaultStyles.colors.primary }}
           />
         </View>
       </ImageBackground>

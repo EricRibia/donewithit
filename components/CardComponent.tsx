@@ -1,7 +1,7 @@
 import { StyleSheet, View, Image, Text } from "react-native";
-import { Colors } from "../utils/colors";
 import React from "react";
 import { ImageSourcePropType } from "react-native/Libraries/Image/Image";
+import defaultStyles from "../default-styles";
 interface CustomCardProps {
   title: string;
   subTitle: string;
@@ -31,7 +31,7 @@ const CardComponent: React.FC<CustomCardProps> = ({
             style={[
               styles.text,
               {
-                color: Colors.primary,
+                color: defaultStyles.colors.primary,
               },
             ]}
           >
