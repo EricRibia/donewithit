@@ -4,6 +4,9 @@ import Screen from "./components/Screen";
 import { useState } from "react";
 import AppTextInput from "./components/AppTextInput";
 import AppPicker from "./components/AppPicker";
+import LoginScreen from "./Screens/LoginScreen";
+import ListingsScreen from "./Screens/ListingsScreen";
+import ListingEditScreen from "./Screens/ListingEditScreen";
 
 const categories = [
   {
@@ -22,18 +25,7 @@ const categories = [
 export default function App() {
   const [isNew, setIsNew] = useState(false);
   const [category, setCategory] = useState("Furniture");
-  return (
-    <Screen>
-      <AppPicker
-        selectedItem={category}
-        onSelectItem={(item) => setCategory(item)}
-        icon="apps"
-        placeholder="Category"
-        items={categories}
-      />
-      <AppTextInput icon="email" placeholder="Category" />
-    </Screen>
-  );
+  return <ListingEditScreen />;
 }
 
 const styles = StyleSheet.create({});

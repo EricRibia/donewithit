@@ -6,6 +6,7 @@ export default {
   textInput: {
     fontSize: 18,
     color: colors.dark,
+    flex: 1,
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
   },
 };

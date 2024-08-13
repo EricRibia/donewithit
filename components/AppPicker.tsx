@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import defaultStyles from "./../default-styles";
 import Screen from "./Screen";
 import PickerItem from "./PickerItem";
+import AppText from "./AppText";
 
 export interface AppTextProps {
   icon: string;
@@ -43,9 +44,13 @@ const AppPicker: React.FC<AppTextProps> = ({
               style={styles.icon}
             />
           )}
-          <Text style={[styles.text, defaultStyles.textInput]}>
-            {selectedItem ? selectedItem : placeholder}
-          </Text>
+          {selectedItem ? (
+            <AppText style={[styles.text, defaultStyles.textInput]}>
+              {selectedItem}
+            </AppText>
+          ) : (
+            <AppText style={styles.placeholder}>{placeholder}</AppText>
+          )}
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -87,9 +92,15 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
+    fontSize: 18,
   },
   icon: {
     marginRight: 10,
+  },
+  placeholder: {
+    color: defaultStyles.colors.medium,
+    fontSize: 18,
+    flex: 1,
   },
 });
 

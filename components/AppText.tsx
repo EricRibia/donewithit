@@ -3,7 +3,7 @@ import React from "react";
 //in app imports
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode | string | any;
   style?: React.ComponentProps<typeof Text>["style"];
 }
 const AppText: React.FC<Props> = ({ children, style }) => {
