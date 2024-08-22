@@ -13,19 +13,27 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 interface CustomButtonProps {
   name: string;
   backgroundColor?: string;
+  iconSize: number;
 }
 
-const IconComponent: React.FC<CustomButtonProps> = (props) => {
+const IconComponent: React.FC<CustomButtonProps> = ({
+  backgroundColor,
+  name,
+  iconSize = 20,
+}) => {
   return (
     <View
       style={[
         styles.container,
+
         {
-          backgroundColor: props.backgroundColor,
+          backgroundColor: backgroundColor,
+          width: iconSize + 20,
+          height: iconSize + 20,
         },
       ]}
     >
-      <MaterialCommunityIcons name={props.name} size={20} color="white" />
+      <MaterialCommunityIcons name={name} size={iconSize} color="white" />
     </View>
   );
 };
@@ -33,8 +41,6 @@ const IconComponent: React.FC<CustomButtonProps> = (props) => {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 100,
-    width: 40,
-    height: 40,
     justifyContent: "center",
     alignItems: "center",
   },

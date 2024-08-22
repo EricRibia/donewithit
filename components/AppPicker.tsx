@@ -8,7 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 //custom in app styles
 import defaultStyles from "./../default-styles";
 import Screen from "./Screen";
@@ -21,6 +21,10 @@ export interface AppTextProps {
   items: { label: string; value: any }[];
   onSelectItem: (value: string) => void;
   selectedItem: string;
+  numberOfColumns: number;
+  width?: number;
+  PickerItemComponent: React.FC<any>;
+  string;
 }
 const AppPicker: React.FC<AppTextProps> = ({
   icon,
@@ -28,14 +32,16 @@ const AppPicker: React.FC<AppTextProps> = ({
   onSelectItem,
   selectedItem,
   items,
-
+  numberOfColumns = 3,
+  PickerItemComponent = PickerItem,
+  width = "100%",
   ...otherProps
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -45,7 +51,11 @@ const AppPicker: React.FC<AppTextProps> = ({
             />
           )}
           {selectedItem ? (
-            <AppText style={[styles.text, defaultStyles.textInput]}>
+            <AppText
+              multiLine={false}
+              numberOfLines={1}
+              style={[styles.text, defaultStyles.textInput]}
+            >
               {selectedItem}
             </AppText>
           ) : (
@@ -63,14 +73,15 @@ const AppPicker: React.FC<AppTextProps> = ({
           <Button title="Close" onPress={() => setModalVisible(false)} />
           <FlatList
             data={items}
+            numColumns={numberOfColumns}
             keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
-              <PickerItem
+              <PickerItemComponent
                 onPress={(item) => {
                   setModalVisible(false);
                   onSelectItem(item);
                 }}
-                label={item.label}
+                item={item}
               />
             )}
           />

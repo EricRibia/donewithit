@@ -6,10 +6,15 @@ import defaultStyles from "./../default-styles";
 
 export interface AppTextProps {
   icon: string;
+  width?: string | number;
 }
-const AppTextInput: React.FC<AppTextProps> = ({ icon, ...otherProps }) => {
+const AppTextInput: React.FC<AppTextProps> = ({
+  icon,
+  width = "100%",
+  ...otherProps
+}) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { width: width }]}>
       <MaterialCommunityIcons
         name={icon}
         size={20}
@@ -31,7 +36,6 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     flexDirection: "row",
     alignItems: "center",
-    width: "100%",
     padding: 15,
     marginVertical: 10,
   },

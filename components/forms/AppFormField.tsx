@@ -7,9 +7,10 @@ import ErrorMessage from "./ErrorMessage";
 
 interface Props {
   name: string;
+  width?: number | string;
 }
 
-const AppFormField: React.FC<Props> = ({ name, ...otherProps }) => {
+const AppFormField: React.FC<Props> = ({ name, width, ...otherProps }) => {
   const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
   return (
     <>
@@ -21,6 +22,7 @@ const AppFormField: React.FC<Props> = ({ name, ...otherProps }) => {
         // textContentType="password"
         onBlur={() => setFieldTouched(name)}
         onChangeText={handleChange(name)}
+        width={width}
         // placeholder="Password"
         {...otherProps}
       />

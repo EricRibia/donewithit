@@ -25,15 +25,57 @@ const formFields = {
 const categories = [
   {
     label: "Furniture",
+    backgroundColor: "pink",
+    icon: "table-furniture",
     value: 1,
   },
   {
-    label: "Clothing",
+    label: "Cars",
     value: 2,
+    backgroundColor: "orange",
+    icon: "car",
   },
   {
     label: "Cameras",
     value: 3,
+    backgroundColor: "blue",
+    icon: "camera",
+  },
+  {
+    label: "Games",
+    value: 4,
+    backgroundColor: "purple",
+    icon: "gamepad",
+  },
+  {
+    label: "Clothing",
+    value: 5,
+    backgroundColor: "black",
+    icon: "shoe-heel",
+  },
+  {
+    label: "Sports",
+    value: 6,
+    backgroundColor: "green",
+    icon: "soccer",
+  },
+  {
+    label: "Movies & Music",
+    value: 7,
+    backgroundColor: "brown",
+    icon: "music",
+  },
+  {
+    label: "Books",
+    value: 8,
+    backgroundColor: "violet",
+    icon: "book",
+  },
+  {
+    label: "Other",
+    value: 9,
+    backgroundColor: "gray",
+    icon: "apps",
   },
 ];
 export default function () {
@@ -55,11 +97,14 @@ export default function () {
           maxLength={8}
           placeholder="0.00"
           name="price"
+          width={120}
         />
         <AppFormPicker
           items={categories}
           name="category"
           placeholder="Category"
+          width="50%"
+          numberOfColumns={3}
         />
         <AppFormField
           multiline

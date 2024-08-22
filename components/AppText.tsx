@@ -6,8 +6,12 @@ interface Props {
   children: React.ReactNode | string | any;
   style?: React.ComponentProps<typeof Text>["style"];
 }
-const AppText: React.FC<Props> = ({ children, style }) => {
-  return <Text style={style}>{children}</Text>;
+const AppText: React.FC<Props> = ({ children, style, ...rest }) => {
+  return (
+    <Text {...rest} style={style}>
+      {children}
+    </Text>
+  );
 };
 
 export default AppText;

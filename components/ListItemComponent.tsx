@@ -11,6 +11,8 @@ import { ImageSourcePropType } from "react-native/Libraries/Image/Image";
 import { Swipeable } from "react-native-gesture-handler";
 import IconComponent from "./IconComponent";
 import defaultStyles from "../default-styles";
+import AppText from "./AppText";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface ListItemProps {
   title: string;
@@ -45,10 +47,16 @@ const ListItemComponent: React.FC<ListItemProps> = ({
               {icon && (
                 <IconComponent name={icon} backgroundColor={iconBackground} />
               )}
-              <View>
-                <Text style={[styles.text, { marginBottom: 0 }]}>{title}</Text>
-                {icon && (
-                  <Text
+              <View style={styles.detailsContainer}>
+                <AppText
+                  numberOfLines={1}
+                  style={[styles.text, { marginBottom: 0 }]}
+                >
+                  {title}
+                </AppText>
+                {description && (
+                  <AppText
+                    numberOfLines={2}
                     style={[
                       styles.text,
                       {
@@ -56,10 +64,11 @@ const ListItemComponent: React.FC<ListItemProps> = ({
                       },
                     ]}
                   >
-                    {icon}
-                  </Text>
+                    {description}
+                  </AppText>
                 )}
               </View>
+              <MaterialCommunityIcons name="chevron-right" size={25} />
             </View>
           </TouchableHighlight>
         </Swipeable>
@@ -74,9 +83,11 @@ const ListItemComponent: React.FC<ListItemProps> = ({
               <IconComponent name={icon} backgroundColor={iconBackground} />
             )}
             <View style={{ marginLeft: 10 }}>
-              <Text style={[styles.text, { marginBottom: 0 }]}>{title}</Text>
+              <AppText style={[styles.text, { marginBottom: 0 }]}>
+                {title}
+              </AppText>
               {description && (
-                <Text
+                <AppText
                   style={[
                     styles.text,
                     {
@@ -85,7 +96,7 @@ const ListItemComponent: React.FC<ListItemProps> = ({
                   ]}
                 >
                   {description}
-                </Text>
+                </AppText>
               )}
             </View>
           </View>
@@ -115,5 +126,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 60,
     marginRight: 10,
+  },
+  detailsContainer: {
+    flex: 1,
   },
 });

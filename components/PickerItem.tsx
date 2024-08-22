@@ -4,13 +4,13 @@ import AppText from "./AppText";
 import React from "react";
 
 interface Props {
-  label: string;
   onPress: (value: string) => void;
+  item: any;
 }
-const PickerItem: React.FC<Props> = ({ label, onPress }) => {
+const PickerItem: React.FC<Props> = ({ item, onPress }) => {
   return (
-    <TouchableOpacity onPress={() => onPress(label)}>
-      <AppText style={styles.text}>{label}</AppText>
+    <TouchableOpacity onPress={() => onPress(item.label)}>
+      <AppText style={styles.text}>{item.label}</AppText>
     </TouchableOpacity>
   );
 };

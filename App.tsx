@@ -1,11 +1,6 @@
-import { TextInput, Text, StyleSheet, Switch } from "react-native";
-// in app imports
-import Screen from "./components/Screen";
+import { StyleSheet } from "react-native";
 import { useState } from "react";
-import AppTextInput from "./components/AppTextInput";
-import AppPicker from "./components/AppPicker";
-import LoginScreen from "./Screens/LoginScreen";
-import ListingsScreen from "./Screens/ListingsScreen";
+import MessagesScreen from "./Screens/MessagesScreen";
 import ListingEditScreen from "./Screens/ListingEditScreen";
 
 const categories = [
