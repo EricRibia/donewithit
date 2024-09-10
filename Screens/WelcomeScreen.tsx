@@ -1,8 +1,10 @@
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import ButtonComponent from "../components/ButtonComponent";
 import defaultStyles from "../default-styles";
+import { useNavigation } from "@react-navigation/native";
 
 export default function () {
+  const navigation = useNavigation();
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground
@@ -14,14 +16,16 @@ export default function () {
         <Text style={styles.subText}>Know your cars</Text>
         <View style={styles.btnsContainer}>
           <ButtonComponent
-            label="register"
+            onPress={() => navigation.navigate("Login")}
+            label="login"
             styles={{
               backgroundColor: defaultStyles.colors.secondary,
               marginBottom: 15,
             }}
           />
           <ButtonComponent
-            label="login"
+            onPress={() => navigation.navigate("Register")}
+            label="register"
             styles={{ backgroundColor: defaultStyles.colors.primary }}
           />
         </View>

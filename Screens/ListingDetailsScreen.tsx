@@ -2,19 +2,21 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import ListItemComponent from "../components/ListItemComponent";
 import defaultStyles from "../default-styles";
+import Screen from "../components/Screen";
 
-export default function () {
+export default function ({ route }) {
+  const listing = route.params;
   return (
-    <View style={styles.container}>
+    <Screen styles={{ paddingHorizontal: 10 }}>
       <View
         style={{
           height: 200,
         }}
       >
-        <Image style={styles.img} source={require("./../assets/car1.jpg")} />
+        <Image style={styles.img} source={listing.image} />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>Jeep Rangler for sale!</Text>
+        <Text style={styles.text}>{listing.title}</Text>
         <Text
           style={[
             styles.text,
@@ -23,7 +25,7 @@ export default function () {
             },
           ]}
         >
-          KES 100
+          {listing.subTitle}
         </Text>
       </View>
 
@@ -31,8 +33,10 @@ export default function () {
         title="Eric N. Ribia"
         description=" 5 Listings"
         image={require("./../assets/selfie.jpg")}
+        isSwipeable={false}
+        onPress={() => console.log("orese")}
       />
-    </View>
+    </Screen>
   );
 }
 

@@ -10,11 +10,12 @@ import React from "react";
 interface CustomButtonProps {
   label: string;
   styles: ViewStyle;
+  onPress: () => void;
 }
 
 const ButtonComponent: React.FC<CustomButtonProps> = (props) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={props.onPress}>
       <View style={[styles.btnStyles, props.styles]}>
         <Text style={styles.textStyles}>{props.label}</Text>
       </View>

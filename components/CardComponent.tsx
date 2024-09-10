@@ -1,4 +1,10 @@
-import { StyleSheet, View, Image, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TouchableWithoutFeedback,
+} from "react-native";
 import React from "react";
 import { ImageSourcePropType } from "react-native/Libraries/Image/Image";
 import defaultStyles from "../default-styles";
@@ -6,14 +12,16 @@ interface CustomCardProps {
   title: string;
   subTitle: string;
   image: ImageSourcePropType;
+  onPress: () => void;
 }
 const CardComponent: React.FC<CustomCardProps> = ({
   title,
   subTitle,
   image,
+  onPress,
 }) => {
   return (
-    <View>
+    <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.cardContainer}>
         <View
           style={{
@@ -39,7 +47,7 @@ const CardComponent: React.FC<CustomCardProps> = ({
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -47,6 +55,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     borderRadius: 15,
     backgroundColor: "#fff",
+    marginBottom: 20,
   },
   textContainer: {
     paddingHorizontal: 20,

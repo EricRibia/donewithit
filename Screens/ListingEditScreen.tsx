@@ -1,6 +1,5 @@
-import { View, StyleSheet, Image } from "react-native";
+import { StyleSheet } from "react-native";
 import * as Yup from "yup";
-import * as Location from "expo-location";
 import Screen from "../components/Screen";
 import {
   AppForm,
@@ -9,7 +8,6 @@ import {
   AppFormPicker,
 } from "../components/forms";
 import AppFormImagePicker from "../components/forms/AppFormImagePicker";
-import { useEffect, useState } from "react";
 import useLocation from "../hooks/useLocation";
 
 const validationSchema = Yup.object().shape({
@@ -18,7 +16,6 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().required().min(3).label("Description"),
   category: Yup.string().required().min(4).label("Category"),
   images: Yup.array().min(1, "Please select at least 1 image"),
-  // category: Yup.object().required().nullable().label("Category"),
 });
 
 const formFields = {
@@ -87,7 +84,7 @@ const categories = [
 export default function () {
   const { location } = useLocation();
   return (
-    <Screen styles={styles.container}>
+    <Screen styles={styles.container} backgroundColor={"white"}>
       <AppForm
         initialValues={formFields}
         onSubmit={(values) => console.log(values)}
@@ -130,5 +127,6 @@ export default function () {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    backgroundColor: "#fff",
   },
 });

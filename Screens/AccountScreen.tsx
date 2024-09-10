@@ -83,12 +83,6 @@ export default function () {
 }
 
 const styles = StyleSheet.create({
-  bg: {
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 30 : 0,
-    backgroundColor: "#f1f1f1",
-    paddingHorizontal: 10,
-    paddingBottom: 20,
-  },
   text: {
     fontSize: 15,
     fontWeight: "500",
