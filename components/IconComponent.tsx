@@ -25,7 +25,6 @@ const IconComponent: React.FC<CustomButtonProps> = ({
     <View
       style={[
         styles.container,
-
         {
           backgroundColor: backgroundColor,
           width: iconSize + 20,

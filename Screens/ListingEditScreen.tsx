@@ -1,5 +1,6 @@
 import { View, StyleSheet, Image } from "react-native";
 import * as Yup from "yup";
+import * as Location from "expo-location";
 import Screen from "../components/Screen";
 import {
   AppForm,
@@ -7,12 +8,16 @@ import {
   AppSubmitButton,
   AppFormPicker,
 } from "../components/forms";
+import AppFormImagePicker from "../components/forms/AppFormImagePicker";
+import { useEffect, useState } from "react";
+import useLocation from "../hooks/useLocation";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(3).label("Title"),
   price: Yup.string().required().min(1).max(10000).label("Price"),
   description: Yup.string().required().min(3).label("Description"),
   category: Yup.string().required().min(4).label("Category"),
+  images: Yup.array().min(1, "Please select at least 1 image"),
   // category: Yup.object().required().nullable().label("Category"),
 });
 
@@ -21,6 +26,7 @@ const formFields = {
   price: "",
   description: "",
   category: "",
+  images: [],
 };
 const categories = [
   {
@@ -79,6 +85,7 @@ const categories = [
   },
 ];
 export default function () {
+  const { location } = useLocation();
   return (
     <Screen styles={styles.container}>
       <AppForm
@@ -86,6 +93,7 @@ export default function () {
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
+        <AppFormImagePicker name={"images"} />
         <AppFormField
           autoCorrect={false}
           maxLength={255}
@@ -113,7 +121,7 @@ export default function () {
           numberOfLines={3}
           name="description"
         />
-        <AppSubmitButton label="Post" />
+        <AppSubmitButton label="Post it" />
       </AppForm>
     </Screen>
   );
