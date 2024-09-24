@@ -14,13 +14,16 @@ import defaultStyles from "./../default-styles";
 import Screen from "./Screen";
 import PickerItem from "./PickerItem";
 import AppText from "./AppText";
+import { CategoriesLoader } from "./loaders/CategoriesLoader";
+import { CategoriesResponseT } from "../types";
 
 export interface AppTextProps {
   icon: string;
   placeholder: string;
-  items: { label: string; value: any }[];
+  items: CategoriesResponseT[];
   onSelectItem: (value: string) => void;
   selectedItem: string;
+  isLoading: boolean;
   numberOfColumns: number;
   width?: number;
   PickerItemComponent: React.FC<any>;
@@ -30,6 +33,7 @@ const AppPicker: React.FC<AppTextProps> = ({
   icon,
   placeholder,
   onSelectItem,
+  isLoading,
   selectedItem,
   items,
   numberOfColumns = 3,
@@ -74,16 +78,20 @@ const AppPicker: React.FC<AppTextProps> = ({
           <FlatList
             data={items}
             numColumns={numberOfColumns}
-            keyExtractor={(item) => item.value.toString()}
-            renderItem={({ item }) => (
-              <PickerItemComponent
-                onPress={(item) => {
-                  setModalVisible(false);
-                  onSelectItem(item);
-                }}
-                item={item}
-              />
-            )}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) =>
+              isLoading ? (
+                <CategoriesLoader />
+              ) : (
+                <PickerItemComponent
+                  onPress={(item) => {
+                    setModalVisible(false);
+                    onSelectItem(item);
+                  }}
+                  item={item}
+                />
+              )
+            }
           />
         </Screen>
       </Modal>

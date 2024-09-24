@@ -11,7 +11,7 @@ import defaultStyles from "../default-styles";
 interface CustomCardProps {
   title: string;
   subTitle: string;
-  image: ImageSourcePropType;
+  image: string;
   onPress: () => void;
 }
 const CardComponent: React.FC<CustomCardProps> = ({
@@ -30,7 +30,7 @@ const CardComponent: React.FC<CustomCardProps> = ({
             borderTopLeftRadius: 15,
           }}
         >
-          <Image style={styles.img} source={image} />
+          <Image style={styles.img} source={{ uri: image }} />
         </View>
 
         <View style={styles.textContainer}>

@@ -15,11 +15,16 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import Screen from "../components/Screen";
 import Colors from "../utils/colors";
 import routes from "../Navigation/routes";
+import { useError } from "../context/ErrorContext";
+import { useListingsCreate, useListingsGet } from "../hooks/useListing";
+import { ListingsLoader } from "../components/loaders/ListingsLoader";
 type ListingsScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "Feeds"
 >;
 export default function () {
+  const { showError, clearError } = useError();
+  const { listingsData, error, isLoading } = useListingsGet();
   const [listings, setListings] = useState([
     {
       id: 1,
@@ -50,16 +55,20 @@ export default function () {
       }}
     >
       <FlatList
-        data={listings}
+        data={listingsData}
         keyExtractor={(listing) => listing.id.toString()}
-        renderItem={({ item }) => (
-          <CardComponent
-            onPress={() => navigate(routes.LISTING_DETAILS, item)}
-            title={item.title}
-            subTitle={item.subTitle}
-            image={item.image}
-          />
-        )}
+        renderItem={({ item }) =>
+          isLoading ? (
+            <ListingsLoader />
+          ) : (
+            <CardComponent
+              onPress={() => navigate(routes.LISTING_DETAILS, item)}
+              title={item.title}
+              subTitle={`KES ${item.price}`}
+              image={item.listingImages[0]["fullImage"]}
+            />
+          )
+        }
       />
     </Screen>
   );

@@ -4,16 +4,19 @@ import { useFormikContext } from "formik";
 import AppPicker from "../AppPicker";
 import ErrorMessage from "./ErrorMessage";
 import CategoryPicker from "../CategoryPicker";
+import { CategoriesResponseT } from "../../types";
 
 interface Props {
   name: string;
+  isLoading: boolean;
   numberOfColumns: number;
-  items: { label: string; value: any }[];
+  items: CategoriesResponseT[];
   width?: number | string;
 }
 
 const AppFormPicker: React.FC<Props> = ({
   items,
+  isLoading,
   name,
   placeholder,
   numberOfColumns = 3,
@@ -24,6 +27,7 @@ const AppFormPicker: React.FC<Props> = ({
     <>
       <AppPicker
         icon="apps"
+        isLoading={isLoading}
         placeholder={placeholder}
         items={items}
         onSelectItem={(item) => setFieldValue(name, item)}

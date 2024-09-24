@@ -1,11 +1,4 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-  ViewStyle,
-} from "react-native";
+import { Image, StyleSheet, TouchableHighlight, View } from "react-native";
 import React from "react";
 import { ImageSourcePropType } from "react-native/Libraries/Image/Image";
 import { Swipeable } from "react-native-gesture-handler";

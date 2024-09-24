@@ -28,7 +28,6 @@ export default function ({ route }) {
           {listing.subTitle}
         </Text>
       </View>
-
       <ListItemComponent
         title="Eric N. Ribia"
         description=" 5 Listings"

@@ -9,6 +9,11 @@ import {
 } from "../components/forms";
 import AppFormImagePicker from "../components/forms/AppFormImagePicker";
 import useLocation from "../hooks/useLocation";
+import { useListingsCreate } from "../hooks/useListing";
+import { useError } from "../context/ErrorContext";
+import { useEffect } from "react";
+import AppText from "../components/AppText";
+import { useCategories } from "../hooks/useCategories";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(3).label("Title"),
@@ -25,7 +30,7 @@ const formFields = {
   category: "",
   images: [],
 };
-const categories = [
+const categoriesd = [
   {
     label: "Furniture",
     backgroundColor: "pink",
@@ -81,13 +86,52 @@ const categories = [
     icon: "apps",
   },
 ];
+interface CreateListingFormValuesT {
+  category: string;
+  description: string;
+  images: {
+    id: string;
+    uri: string;
+  }[];
+  price: string;
+  title: string;
+}
 export default function () {
   const { location } = useLocation();
+  const { showError, clearError } = useError();
+  const { createListing, error } = useListingsCreate();
+  const { isLoading, error: categoriesError, categories } = useCategories();
+
+  const handleCreateListing = (formValues: CreateListingFormValuesT) => {
+    console.log("values", formValues);
+    createListing({
+      title: formValues.title,
+      description: formValues.description,
+      price: Number(formValues.price),
+      images: formValues.images.map((image) => image.uri),
+      categoryId: formValues.category,
+      latitude: location?.latitude || 0,
+      longitude: location?.longitude || 0,
+    });
+  };
+
+  const handleError = () => {
+    showError(error);
+  };
+  useEffect(() => {
+    console.log("e", error);
+    if (error) {
+      handleError();
+    }
+  }, [error]);
+  useEffect(() => {
+    clearError();
+  }, []);
   return (
     <Screen styles={styles.container} backgroundColor={"white"}>
       <AppForm
         initialValues={formFields}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => handleCreateListing(values)}
         validationSchema={validationSchema}
       >
         <AppFormImagePicker name={"images"} />
@@ -106,6 +150,7 @@ export default function () {
         />
         <AppFormPicker
           items={categories}
+          isLoading={isLoading}
           name="category"
           placeholder="Category"
           width="50%"
@@ -128,5 +173,8 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     backgroundColor: "#fff",
+  },
+  keyboardContainer: {
+    flex: 1,
   },
 });

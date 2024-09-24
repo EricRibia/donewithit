@@ -11,14 +11,14 @@ interface Props {
 
 const CategoryPicker: React.FC<Props> = ({ item, onPress }) => {
   return (
-    <TouchableOpacity style={{ flex: 1 }} onPress={() => onPress(item.label)}>
+    <TouchableOpacity style={{ flex: 1 }} onPress={() => onPress(item.id)}>
       <View style={styles.container}>
         <IconComponent
           name={item.icon}
           backgroundColor={item.backgroundColor}
           iconSize={60}
         />
-        <AppText style={styles.label}>{item.label}</AppText>
+        <AppText style={styles.label}>{item.name}</AppText>
       </View>
     </TouchableOpacity>
   );

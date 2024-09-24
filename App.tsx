@@ -1,14 +1,18 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FeedNavigation from "./Navigation/FeedNavigation";
+import "react-native-reanimated";
+import "react-native-gesture-handler";
 import ListingEditScreen from "./Screens/ListingEditScreen";
 import AccountScreen from "./Screens/AccountScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "./utils/colors";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import AuthNavigator from "./Navigation/AuthNavigator";
+import { StyleSheet } from "react-native";
 import NavigationTheme from "./Navigation/NavigationTheme";
 import NewListingButton from "./Navigation/NewListingButton";
+import AppSnackBar from "./components/AppSnackBar";
+import { ErrorProvider } from "./context/ErrorContext";
+import { PaperProvider } from "react-native-paper";
 const Tab = createBottomTabNavigator();
 
 export interface RootStackParamList {
@@ -33,6 +37,7 @@ const TabNavigator = () => {
             <MaterialCommunityIcons name={"home"} size={size} color={color} />
           ),
           headerTitleAlign: "center",
+          tabBarLabel: "Home",
           headerShown: false,
         }}
         name={"ListingsTab"}
@@ -69,10 +74,15 @@ const TabNavigator = () => {
 };
 export default function App() {
   return (
-    <NavigationContainer theme={NavigationTheme}>
-      <TabNavigator />
-      {/*<AuthNavigator />*/}
-    </NavigationContainer>
+    <PaperProvider>
+      <ErrorProvider>
+        <NavigationContainer theme={NavigationTheme}>
+          <TabNavigator />
+          {/*<AuthNavigator />*/}
+        </NavigationContainer>
+        <AppSnackBar />
+      </ErrorProvider>
+    </PaperProvider>
   );
 }
 
